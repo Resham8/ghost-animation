@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cute Ghost Button</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spooky Chase Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="container">
-        <div class="instruction">Try to catch the ghost! 👻</div>
-        <div class="ghost-button" id="ghostButton">
-            <div class="glow" id="glow"></div>
-            <div class="ghost" id="ghost">
-                <div class="ghost-eyes">
-                    <div class="eye"></div>
-                    <div class="eye"></div>
-                </div>
-                <div class="ghost-mouth"></div>
-            </div>
+      <div class="instruction">Try to catch me! 👻</div>
+      <div class="character-button" id="characterButton">
+        <div class="glow" id="glow"></div>
+        <div id="characterContainer"></div>
+      </div>
+
+      <div class="character-selector">
+        <div class="selector-option active" data-character="ghost">
+          👻 Ghost
         </div>
+        <div class="selector-option" data-character="pumpkin">🎃 Pumpkin</div>
+        <div class="selector-option" data-character="monster">👾 Monster</div>
+        <div class="selector-option" data-character="bat">🦇 Bat</div>
+        <div class="selector-option" data-character="witch">🧙 Witch Hat</div>
+        <div class="selector-option" data-character="skull">💀 Skull</div>
+        <div class="selector-option" data-character="cat">🐱 Black Cat</div>
+        <div class="selector-option" data-character="candy">🍬 Candy Corn</div>
+      </div>
     </div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

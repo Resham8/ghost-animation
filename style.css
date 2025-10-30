@@ -16,7 +16,7 @@ body {
   height: 100vh;
 }
 
-.ghost-button {
+.character-button {
   position: absolute;
   width: 80px;
   height: 100px;
@@ -45,7 +45,6 @@ body {
   width: 100%;
   height: 50px;
   background: #ffffff;
-  color: #ffffff;
   clip-path: polygon(
     0% 0%,
     10% 80%,
@@ -71,17 +70,6 @@ body {
   gap: 15px;
 }
 
-@keyframes blink {
-  0%,
-  90%,
-  100% {
-    transform: scaleY(1);
-  }
-  95% {
-    transform: scaleY(0.1);
-  }
-}
-
 .eye {
   width: 12px;
   height: 12px;
@@ -103,6 +91,204 @@ body {
   background: transparent;
 }
 
+/* Pumpkin styles */
+.pumpkin {
+  width: 90px;
+  height: 90px;
+  background: #ff8c00;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 0 20px rgba(255, 140, 0, 0.5);
+  transition: all 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.pumpkin::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: #228b22;
+  border-radius: 0 50% 0 50%;
+}
+
+.pumpkin-lines {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.pumpkin-line {
+  position: absolute;
+  width: 3px;
+  height: 100%;
+  background: #d2691e;
+  top: 0;
+}
+
+.pumpkin-line:nth-child(1) {
+  left: 25%;
+}
+.pumpkin-line:nth-child(2) {
+  left: 50%;
+}
+.pumpkin-line:nth-child(3) {
+  left: 75%;
+}
+
+.pumpkin-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.pumpkin-eye {
+  position: absolute;
+  top: 30px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 12px solid #333;
+}
+
+.pumpkin-eye:nth-child(1) {
+  left: 20px;
+}
+.pumpkin-eye:nth-child(2) {
+  right: 20px;
+}
+
+.pumpkin-mouth {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 20px;
+  border: 3px solid #333;
+  border-top: none;
+  border-radius: 0 0 50% 50%;
+}
+
+/* Monster styles */
+.monster {
+  width: 80px;
+  height: 90px;
+  background: #9370db;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 0 20px rgba(147, 112, 219, 0.5);
+  transition: all 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.monster-horns {
+  position: absolute;
+  top: -10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.horn {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 20px solid #8b008b;
+}
+
+.monster-eyes {
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+}
+
+.monster-eye {
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  position: relative;
+}
+
+.monster-eye::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #333;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: lookAround 4s infinite;
+}
+
+.monster-mouth {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 15px;
+  background: #333;
+  border-radius: 0 0 50% 50%;
+}
+
+.monster-teeth {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.tooth {
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 8px solid #fff;
+}
+
+.monster-arms {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.arm {
+  position: absolute;
+  width: 15px;
+  height: 40px;
+  background: #9370db;
+  border-radius: 10px;
+  top: 30px;
+}
+
+.arm-left {
+  left: -10px;
+  transform: rotate(-20deg);
+}
+.arm-right {
+  right: -10px;
+  transform: rotate(20deg);
+}
+
 .glow {
   position: absolute;
   top: 50%;
@@ -122,21 +308,41 @@ body {
   pointer-events: none;
 }
 
-.ghost-button.moving {
-  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.ghost.scared {
+.scared {
   animation: shake 0.1s infinite;
 }
 
 @keyframes wave {
   0%,
   100% {
-    clip-path: polygon(0% 50%, 25% 60%, 50% 50%, 75% 40%, 100% 50%);
+    clip-path: polygon(
+      0% 0%,
+      10% 80%,
+      20% 60%,
+      30% 90%,
+      40% 70%,
+      50% 100%,
+      60% 70%,
+      70% 90%,
+      80% 60%,
+      90% 80%,
+      100% 0%
+    );
   }
   50% {
-    clip-path: polygon(0% 60%, 25% 50%, 50% 60%, 75% 50%, 100% 60%);
+    clip-path: polygon(
+      0% 50%,
+      10% 60%,
+      20% 50%,
+      30% 70%,
+      40% 60%,
+      50% 80%,
+      60% 60%,
+      70% 70%,
+      80% 50%,
+      90% 60%,
+      100% 50%
+    );
   }
 }
 
@@ -163,8 +369,50 @@ body {
   }
 }
 
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(5deg);
+  }
+}
+
+@keyframes blink {
+  0%,
+  90%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes lookAround {
+  0%,
+  100% {
+    transform: translate(-50%, -50%);
+  }
+  25% {
+    transform: translate(-70%, -50%);
+  }
+  75% {
+    transform: translate(-30%, -50%);
+  }
+}
+
 .ghost {
   animation: float 3s ease-in-out infinite;
+}
+
+.pumpkin {
+  animation: bounce 2.5s ease-in-out infinite;
+}
+
+.monster {
+  animation: float 2s ease-in-out infinite;
 }
 
 .instruction {
@@ -176,4 +424,519 @@ body {
   text-align: center;
   font-size: 18px;
   z-index: 10;
+}
+
+.character-selector {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 8px 14px;
+  border-radius: 12px;
+  backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  z-index: 20;
+}
+
+.selector-option {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  border: 1px solid transparent;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.selector-option:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.selector-option.active {
+  background: rgba(255, 255, 255, 0.28);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 6px rgba(255, 255, 255, 0.15);
+}
+
+/* Bat styles */
+.bat {
+  width: 100px;
+  height: 50px;
+  position: relative;
+  transition: all 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.bat-body {
+  position: absolute;
+  width: 30px;
+  height: 35px;
+  background: #2c2c2c;
+  border-radius: 50% 50% 50% 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.bat-head {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #2c2c2c;
+  border-radius: 50%;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bat-ears {
+  position: absolute;
+  width: 100%;
+  top: -8px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2px;
+}
+
+.bat-ear {
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 10px solid #2c2c2c;
+}
+
+.bat-eyes {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+}
+
+.bat-eye {
+  width: 4px;
+  height: 4px;
+  background: #ff0000;
+  border-radius: 50%;
+  box-shadow: 0 0 3px #ff0000;
+}
+
+.bat-wings {
+  position: absolute;
+  width: 100%;
+  top: 8px;
+  left: 0;
+}
+
+.bat-wing {
+  position: absolute;
+  width: 40px;
+  height: 30px;
+  background: #2c2c2c;
+  border-radius: 50% 50% 0 50%;
+  transform-origin: top center;
+}
+
+.bat-wing-left {
+  left: -5px;
+  transform: rotate(-10deg);
+  animation: flapLeft 0.5s ease-in-out infinite;
+}
+
+.bat-wing-right {
+  right: -5px;
+  transform: scaleX(-1) rotate(-10deg);
+  animation: flapRight 0.5s ease-in-out infinite;
+}
+
+/* Witch Hat styles */
+.witch-hat {
+  width: 90px;
+  height: 100px;
+  position: relative;
+  transition: all 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.hat-top {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-bottom: 70px solid #4a0080;
+  left: 50%;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 0 10px rgba(74, 0, 128, 0.5));
+}
+
+.hat-brim {
+  position: absolute;
+  width: 90px;
+  height: 15px;
+  background: #4a0080;
+  border-radius: 50%;
+  bottom: 25px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hat-buckle {
+  position: absolute;
+  width: 15px;
+  height: 12px;
+  background: #ffd700;
+  border: 2px solid #b8860b;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.hat-buckle::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #4a0080;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Skull styles */
+.skull {
+  width: 70px;
+  height: 85px;
+  position: relative;
+  transition: all 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.skull-head {
+  width: 70px;
+  height: 70px;
+  background: #f0e68c;
+  border-radius: 50% 50% 45% 45%;
+  position: relative;
+  box-shadow: 0 0 20px rgba(240, 230, 140, 0.3);
+}
+
+.skull-eyes {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 18px;
+}
+
+.skull-eye {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 12px solid #333;
+  border-radius: 50%;
+}
+
+.skull-nose {
+  position: absolute;
+  top: 38px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #333;
+}
+
+.skull-jaw {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 20px;
+  background: #f0e68c;
+  border-radius: 0 0 50% 50%;
+  box-shadow: 0 0 20px rgba(240, 230, 140, 0.3);
+}
+
+.skull-teeth {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 8px;
+}
+
+.skull-tooth {
+  width: 4px;
+  height: 8px;
+  background: #333;
+}
+
+/* Black Cat styles */
+.black-cat {
+  width: 80px;
+  height: 90px;
+  position: relative;
+  transition: all 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.cat-body {
+  position: absolute;
+  width: 50px;
+  height: 60px;
+  background: #1a1a1a;
+  border-radius: 40% 40% 50% 50%;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+.cat-head {
+  position: absolute;
+  width: 45px;
+  height: 40px;
+  background: #1a1a1a;
+  border-radius: 50% 50% 40% 40%;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.cat-ears {
+  position: absolute;
+  width: 100%;
+  top: -10px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 3px;
+}
+
+.cat-ear {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid #1a1a1a;
+}
+
+.cat-ear-inner {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 12px solid #ff69b4;
+  top: 4px;
+  left: 2px;
+}
+
+.cat-eyes {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+}
+
+.cat-eye {
+  width: 8px;
+  height: 14px;
+  background: #00ff00;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #00ff00;
+  position: relative;
+}
+
+.cat-eye::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 10px;
+  background: #000;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cat-nose {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #ff69b4;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.cat-whiskers {
+  position: absolute;
+  top: 20px;
+  width: 100%;
+}
+
+.whisker {
+  position: absolute;
+  width: 20px;
+  height: 1px;
+  background: #666;
+}
+
+.whisker-left-1 {
+  left: -15px;
+  top: 0;
+  transform: rotate(-10deg);
+}
+.whisker-left-2 {
+  left: -15px;
+  top: 5px;
+}
+.whisker-right-1 {
+  right: -15px;
+  top: 0;
+  transform: rotate(10deg);
+}
+.whisker-right-2 {
+  right: -15px;
+  top: 5px;
+}
+
+.cat-tail {
+  position: absolute;
+  width: 8px;
+  height: 40px;
+  background: #1a1a1a;
+  border-radius: 10px;
+  right: 5px;
+  bottom: 15px;
+  transform: rotate(30deg);
+  animation: tailSwing 2s ease-in-out infinite;
+}
+
+/* Candy Corn styles */
+.candy-corn {
+  width: 60px;
+  height: 90px;
+  position: relative;
+  transition: all 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.candy-section {
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
+
+.candy-top {
+  top: 0;
+  height: 30px;
+  background: #fff;
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+.candy-middle {
+  top: 30px;
+  height: 30px;
+  background: #ffa500;
+  clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 20% 100%);
+}
+
+.candy-bottom {
+  top: 60px;
+  height: 30px;
+  background: #ffeb3b;
+  clip-path: polygon(20% 0%, 80% 0%, 60% 100%, 40% 100%);
+}
+
+@keyframes flapLeft {
+  0%,
+  100% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(-30deg);
+  }
+}
+
+@keyframes flapRight {
+  0%,
+  100% {
+    transform: scaleX(-1) rotate(-10deg);
+  }
+  50% {
+    transform: scaleX(-1) rotate(-30deg);
+  }
+}
+
+@keyframes tailSwing {
+  0%,
+  100% {
+    transform: rotate(30deg);
+  }
+  50% {
+    transform: rotate(50deg);
+  }
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.bat {
+  animation: float 2s ease-in-out infinite;
+}
+
+.witch-hat {
+  animation: wiggle 3s ease-in-out infinite;
+}
+
+.skull {
+  animation: float 2.5s ease-in-out infinite;
+}
+
+.black-cat {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.candy-corn {
+  animation: spin 4s linear infinite;
 }
